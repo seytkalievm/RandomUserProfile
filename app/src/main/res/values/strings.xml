@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">UserPage</string>
+    <string name="call">Call</string>
+    <string name="show_on_map">Show on mao</string>
+    <string name="first_name">First Name</string>
+    <string name="second_name">Second Name</string>
+    <string name="birthday_example">11.12.1984</string>
+    <string name="address_example">City, Province, Country. (420500)</string>
+    <string name="cooridnates_example">0.6394, -82.8039</string>
+    <string name="profile_picture">Profile Picture</string>
+    <string name="update">Update</string>
+    <string name="phone_example">+7 777 123 4567</string>
+    <string name="loading">Loading...</string>
+    <string name="date_of_birth">Date of birth:</string>
+    <string name="phone_number">Phone number:</string>
+    <string name="coordinates">Coordinates:</string>
+    <string name="retry">Retry</string>
+</resources>
