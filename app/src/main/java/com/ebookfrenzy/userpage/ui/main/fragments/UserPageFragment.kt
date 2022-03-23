@@ -9,7 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.ebookfrenzy.userpage.MainActivity
-import com.ebookfrenzy.userpage.databinding.MainFragmentBinding
+import com.ebookfrenzy.userpage.databinding.RandomUserFragmentBinding
 
 
 class UserPageFragment : Fragment() {
@@ -18,7 +18,7 @@ class UserPageFragment : Fragment() {
         fun newInstance() = UserPageFragment()
     }
 
-    private lateinit var binding: MainFragmentBinding
+    private lateinit var binding: RandomUserFragmentBinding
     private lateinit var viewModel: UserPageViewModel
     private lateinit var loadingDialog: LoadingDialog
 
@@ -26,7 +26,7 @@ class UserPageFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = MainFragmentBinding.inflate(inflater, container, false)
+        binding = RandomUserFragmentBinding.inflate(inflater, container, false)
 
         loadingDialog = LoadingDialog(requireActivity())
 
@@ -39,6 +39,7 @@ class UserPageFragment : Fragment() {
         viewModel =(activity as MainActivity).viewModel
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
+        binding.userProfile.viewModel = viewModel
 
         setOnClickListeners()
 
@@ -46,18 +47,20 @@ class UserPageFragment : Fragment() {
             when (it) {
                 "loading" -> {
                     loadingDialog.showDialog()
-                    binding.innerContainer.visibility = View.GONE
+                    binding.userProfile.constraintLayout.visibility = View.GONE
+                    binding.updateButton.visibility = View.GONE
                     binding.errorTextView.visibility = View.GONE
                     binding.retryButton.visibility = View.GONE
                 }
                 "success" -> {
-                    binding.innerContainer.visibility = View.VISIBLE
+                    binding.userProfile.constraintLayout.visibility = View.VISIBLE
+                    binding.updateButton.visibility = View.VISIBLE
                     binding.errorTextView.visibility = View.GONE
                     binding.retryButton.visibility = View.GONE
                     loadingDialog.cancelDialog()
                 } else -> {
-
-                binding.innerContainer.visibility = View.GONE
+                    binding.userProfile.constraintLayout.visibility = View.GONE
+                    binding.updateButton.visibility = View.GONE
                     binding.errorTextView.visibility = View.VISIBLE
                     binding.retryButton.visibility = View.VISIBLE
                     loadingDialog.cancelDialog()
@@ -72,14 +75,14 @@ class UserPageFragment : Fragment() {
             viewModel.updateProfile()
         }
 
-        binding.callButton.setOnClickListener{
+        binding.userProfile.callButton.setOnClickListener(){
             val callIntent = Intent(Intent.ACTION_DIAL)
             val phoneNumber = viewModel.profile.value?.phone
             callIntent.setData(Uri.parse("tel:$phoneNumber"))
             startActivity(callIntent)
         }
 
-        binding.showOnMapButton.setOnClickListener{
+        binding.userProfile.showOnMapButton.setOnClickListener{
             val mapIntent = Intent(Intent.ACTION_VIEW)
             val coords = viewModel.profile.value?.location?.coordinates
             mapIntent.setData(Uri.parse("geo:$coords"))
