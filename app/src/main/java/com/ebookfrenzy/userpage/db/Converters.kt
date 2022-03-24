@@ -20,24 +20,23 @@ class Converters {
 
     @TypeConverter
     fun fromLocation(location: Location): String{
-        val result = "${location.city} ${location.state} ${location.country} ${location.postcode} "
-        val coordinates = "${location.coordinates.latitude} ${location.coordinates.longitude}"
+        val result = "${location.city},${location.state},${location.country},${location.postcode},"
+        val coordinates = "${location.coordinates.latitude},${location.coordinates.longitude}"
         return result + coordinates
     }
 
     @TypeConverter
     fun toLocation(string: String): Location {
-        val location = string.split("\\s".toRegex()).toTypedArray()
+        val location = string.split(",").toTypedArray()
+        val coordinates = Coordinates(
+            location[4].toDouble(),
+            location[5].toDouble())
         return Location(
             city = location[0],
             state = location[1],
             country = location[2],
             postcode = location[3],
-            coordinates = Coordinates(
-                latitude = location[4].toDouble(),
-                longitude = location[6].toDouble()
-            )
-        )
+            coordinates = coordinates)
     }
 
     @TypeConverter

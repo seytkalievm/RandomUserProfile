@@ -1,4 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <item
+        android:id="@+id/userPageFragment"
+        android:title="@string/random"
+        android:icon="@drawable/random_icon"/>
+
+    <item
+        android:id="@+id/savedProfilesFragment"
+        android:title="@string/saved"
+        android:icon="@drawable/list_icon"/>
 </menu>

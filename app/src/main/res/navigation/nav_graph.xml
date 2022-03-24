@@ -1,6 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:app="http://schemas.android.com/apk/res-auto"
-             android:id="@+id/nav_graph">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/userPageFragment">
 
+    <fragment
+        android:id="@+id/userPageFragment"
+        android:name="com.ebookfrenzy.userpage.ui.main.fragments.UserPageFragment"
+        android:label="main_fragment"
+        tools:layout="@layout/random_user_fragment" />
+
+    <fragment
+        android:id="@+id/savedProfilesFragment"
+        android:name="com.ebookfrenzy.userpage.ui.main.fragments.SavedProfilesFragment"
+        android:label="fragment_saved_profiles"
+        tools:layout="@layout/fragment_saved_profiles" >
+        <action
+            android:id="@+id/action_savedProfilesFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.ebookfrenzy.userpage.ui.main.fragments.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
 </navigation>

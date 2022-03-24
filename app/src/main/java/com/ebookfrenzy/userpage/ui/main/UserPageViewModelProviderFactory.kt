@@ -6,8 +6,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.ebookfrenzy.userpage.repository.ProfileRepository
 
 class UserPageViewModelProviderFactory (
-    val application: Application,
-    val profileRepository: ProfileRepository) : ViewModelProvider.Factory{
+    private val application: Application,
+    private val profileRepository: ProfileRepository) : ViewModelProvider.Factory{
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return UserPageViewModel(application, profileRepository) as T
     }

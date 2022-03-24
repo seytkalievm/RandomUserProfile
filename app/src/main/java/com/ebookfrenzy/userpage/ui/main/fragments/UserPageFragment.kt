@@ -1,22 +1,19 @@
-package com.ebookfrenzy.userpage.ui.main
+package com.ebookfrenzy.userpage.ui.main.fragments
 
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.ebookfrenzy.userpage.MainActivity
 import com.ebookfrenzy.userpage.databinding.RandomUserFragmentBinding
+import com.ebookfrenzy.userpage.ui.main.LoadingDialog
+import com.ebookfrenzy.userpage.ui.main.UserPageViewModel
 
 
 class UserPageFragment : Fragment() {
-
-    companion object {
-        fun newInstance() = UserPageFragment()
-    }
 
     private lateinit var binding: RandomUserFragmentBinding
     private lateinit var viewModel: UserPageViewModel
@@ -78,14 +75,14 @@ class UserPageFragment : Fragment() {
         binding.userProfile.callButton.setOnClickListener(){
             val callIntent = Intent(Intent.ACTION_DIAL)
             val phoneNumber = viewModel.profile.value?.phone
-            callIntent.setData(Uri.parse("tel:$phoneNumber"))
+            callIntent.data = (Uri.parse("tel:$phoneNumber"))
             startActivity(callIntent)
         }
 
         binding.userProfile.showOnMapButton.setOnClickListener{
             val mapIntent = Intent(Intent.ACTION_VIEW)
             val coords = viewModel.profile.value?.location?.coordinates
-            mapIntent.setData(Uri.parse("geo:$coords"))
+            mapIntent.data = (Uri.parse("geo:$coords"))
             startActivity(mapIntent)
         }
         binding.retryButton.setOnClickListener{

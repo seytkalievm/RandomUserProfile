@@ -1,6 +1,5 @@
 package com.ebookfrenzy.userpage.entities
 
-import androidx.annotation.NonNull
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -47,7 +46,11 @@ data class ProfileEntity(
 data class Name(
     val first: String,
     val last: String,
-)
+){
+    override fun toString(): String {
+        return "$first $last"
+    }
+}
 
 data class Coordinates(
     val latitude: Double,
@@ -66,6 +69,7 @@ data class DateOfBirth(val date: String){
         return stringFormatter.format(date)
 
     }
+
 }
 
 data class Location(

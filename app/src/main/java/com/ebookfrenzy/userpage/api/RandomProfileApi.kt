@@ -1,6 +1,5 @@
 package com.ebookfrenzy.userpage.api
 
-import com.ebookfrenzy.userpage.entities.ProfileEntity
 import com.ebookfrenzy.userpage.entities.ResponseData
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.Moshi

@@ -4,7 +4,6 @@ import android.app.Application
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -20,8 +19,11 @@ class UserPageViewModel(
     application: Application,
     private val profileRepository: ProfileRepository) : AndroidViewModel(application) {
 
-    private val _profile = MutableLiveData<ProfileEntity>()
-    val profile: LiveData<ProfileEntity> get() = _profile
+    val profiles: LiveData<List<ProfileEntity>> = profileRepository.getAllProfiles()
+    private var _lastProfile: ProfileEntity? = null
+
+    private val _profile = MutableLiveData<ProfileEntity?>()
+    val profile: LiveData<ProfileEntity?> get() = _profile
 
     private val _loadingStatus = MutableLiveData<String>()
     val loadingStatus: LiveData<String> get() = _loadingStatus
@@ -51,17 +53,11 @@ class UserPageViewModel(
                 } else{
                     stopLoading("error")
                     _status.value = "No internet connection"
-                    Log.i("E", "No internet connection")
                 }
 
             }catch (t: Throwable){
                 _status.value = t.message.toString()
-                Log.i("E", t.message.toString())
                 stopLoading("error")
-            }catch (e: Exception){
-                _status.value = e.message.toString()
-                Log.i("E",e.message.toString())
-                stopLoading("exception")
             }
         }
     }
@@ -90,6 +86,16 @@ class UserPageViewModel(
             capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> true
             else -> false
         }
+    }
+
+    fun startDisplayProfile(new_profile: ProfileEntity){
+        _lastProfile = profile.value
+        _profile.value = new_profile
+    }
+
+    fun endDisplayProfile(){
+        _profile.value = _lastProfile
+
     }
 
 }
