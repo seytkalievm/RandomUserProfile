@@ -17,7 +17,11 @@
     <string name="Retry">Retry</string>
     <string name="random">random</string>
     <string name="saved">saved</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="back">Back</string>
+    <string name="save">Save</string>
+    <string name="delete">Delete</string>
+    <string name="profile_already_exist">Profile already exist</string>
+    <string name="profile_saved">profile successfully saved</string>
+    <string name="unknown_error">Unknown error</string>
+    <string name="no_suitable_application">No suitable application</string>
 </resources>
